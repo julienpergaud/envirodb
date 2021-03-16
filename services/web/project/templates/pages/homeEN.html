@@ -1,0 +1,98 @@
+{% extends 'layouts/default2.html' %}
+
+    {% block user %}
+    {% if log == True %}
+
+        <div class="w3-container w3-row">
+            <div class="w3-col s4">
+                <img src="{{url_for('static', filename='assets/avatar2.png')}}" class="w3-circle w3-margin-right" style="width:46px">
+            </div>
+            <div class="w3-col s8 w3-bar">
+                <span>Welcome, <strong>{{user.name}}</strong></span><br>
+                <a href={{url_for('account')}} class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+                <a href={{url_for('logout')}} class="w3-bar-item w3-button"><i class="fa fa-user-times"></i></a>
+            </div>
+        </div>
+    {% else %}
+        <div class="w3-container">
+            <span class="w3-center"><a onclick="document.getElementById('Connexion').style.display='block'"
+                class="w3-text-indigo w3-center" title="Sign in">Sign in</a>
+                <div id='Connexion' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin w3-center">
+                            <span onclick="document.getElementById('Connexion').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <a href={{ url_for('login', type='local') }} class="w3-button w3-light-blue
+                                        w3-round-large w3-margin">Authentification </a>
+                            <a href={{ url_for('login', type='CAS') }} class="w3-button w3-blue
+                                        w3-round-large w3-margin">CAS Authentification</a>
+                        </div>
+                    </div>
+                </div></span>
+            <span class="w3-center"><a href={{ url_for('register') }} class="w3-text-indigo w3-center">Register</a></span>
+        </div>
+    <hr>
+    {% endif %}
+    {% endblock %}
+
+    {% block menue %}
+        <a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home fa-fw"></i> Home</a>
+        {% if log == True %}
+        <a href={{url_for('networks')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Network</a>
+        <a href={{url_for('measures')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Measures</a>
+        {% if admin == True %}
+        <a href={{url_for('admin')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-briefcase fa-fw"></i>
+            Administration </a>
+        {% endif %}
+        {% endif %}
+    {% endblock %}
+
+
+{% block body %}
+<div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding w3-center">
+
+    <div class="w3-padding">
+        <h2 class="w3-text-green"> EnviroDB</h2>
+        <p> Environnemental data manager</p>
+    </div>
+</div>
+
+<div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding">
+
+    <h2 class="w3-text-green">Network list: </h2>
+
+
+    {% for database in reseaux %}
+    <div class="w3-container w3-border-top w3-padding">
+        <h3 class="w3-text-green">Sensor network : {{database.name}}</h3>
+        <div class="w3-left" id="map{{database.id_network}}" style="height: 400px; width: 600px ; z-index: 2"></div>
+        <script>
+            _capteurs = {{capteurs | safe}}
+            createMap({{database.id_network}},_capteurs)
+        </script>
+
+        <div class="w3-center w3-padding">
+            <p><strong> Details : </strong></p>
+            <p>{{database.descCourtEn}} </p>
+            {% if database.dateDebut is not none %}
+            <p><strong> Date of network creation : </strong></p>
+            <p>{{database.dateDebut.strftime('%d/%m/%Y')}}</p>
+            {% endif %}
+            {% if log == True %}
+                {%if user.networkList is not none%}
+                    {% if database.id_network is in user.networkList %}
+                        <a href={{url_for('networks', id_network=database.id_network)}} class="w3-button w3-green w3-round-large"> Détails</a>
+                    {% else %}
+                        <a href={{url_for('reqMailNetwork', id_network=database.id_network, email=user.email)}} class="w3-button w3-orange w3-round-large"> Ask for the access right</a>
+                    {% endif %}
+                {% else %}
+                        <a href={{url_for('reqMailNetwork', id_network=database.id_network, email=user.email)}} class="w3-button w3-orange w3-round-large"> Ask for the access right</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

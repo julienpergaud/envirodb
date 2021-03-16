@@ -1,0 +1,106 @@
+{% extends 'layouts/default2.html' %}
+
+{% block menue %}
+    <a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Accueil </a>
+{% endblock %}
+
+{% block header %}
+   
+    <span class="w3-bar-item w3-right"><a onclick="document.getElementById('Connexion').style.display='block'"
+                class="w3-text-indigo" title="Se connecter">Sign in</a>
+                <div id='Connexion' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin w3-center">
+                            <span onclick="document.getElementById('Connexion').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <a href={{ url_for('login', type='local') }} class="w3-button w3-light-blue
+                                        w3-round-large w3-margin">Authentification </a>
+                            <a href={{ url_for('login', type='CAS') }} class="w3-button w3-blue
+                                        w3-round-large w3-margin">CAS Authentification CAS</a>
+                        </div>
+                    </div>
+                </div></span>
+    <span class="w3-bar-item w3-right"><a href={{ url_for('register') }} class="w3-text-indigo
+                ">Register</a></span>
+    {% endblock %}
+
+
+{% block body %}
+    {% if resultat == 'CAS' %}
+
+        {% if err == '1' %}
+            <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+                <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+                <h3> Erreur d'authentification :</h3>
+                <p> Votre connexion au service CAS à rencontrée une erreur.</p>
+            </div>
+
+        {% endif %}
+
+        {% if err == '2' %}
+            <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+                <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+                <h3> Erreur d'authentification :</h3>
+                <p> Votre compte n'est pas encore actif.</p>
+            </div>
+
+        {% endif %}
+
+        <form action="{{ url_for('rqstcas') }}" class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding w3-center"
+              method="post">
+            <h2 class="w3-text-green w3-center">Veuillez choisir votre université</h2>
+
+            <select class="w3-select w3-border w3-leftbar w3-padding" name="univ">
+                <option value="" disabled selected>Choisissez votre université</option>
+                <option value="https://cas.u-bourgogne.fr/login">Université de Dijon</option>
+                <option value="https://cas.univ-fcomte.fr/cas/login">Université de Besancon</option>
+            </select>
+
+            <input class="w3-btn w3-green w3-margin" type="submit" value="Se connecter >">
+
+        </form>
+    {% endif %}
+
+    {% if resultat == 'local' %}
+        {% if err == '1' %}
+            <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+                <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+                <h3> Erreur d'authentification :</h3>
+                <p> Vos informations de connexion sont incorrectes.</p>
+            </div>
+        {% endif %}
+
+        {% if err == '2' %}
+            <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+                <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+                <h3> Erreur d'authentification :</h3>
+                <p> Votre compte n'est pas encore actif.</p>
+            </div>
+        {% endif %}
+
+        <div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding w3-center">
+            <h2 class="w3-text-green">Connexion</h2>
+            <form action="{{ url_for('rqstlog') }}" method="post">
+
+                <div class="w3-container w3-auto w3-margin">
+                    <div class="w3-auto" style="width:50px"><i class="w3-xxlarge w3-text-green fa fa-user"></i></div>
+                    <input class="w3-input w3-border w3-auto" style="width:400px" name="login" type="text"
+                           placeholder="Pseudonyme">
+                </div>
+
+                <div class="w3-container w3-auto w3-margin">
+                    <i class="w3-xxlarge w3-text-green fa fa-lock" style="width:50px"></i>
+                    <input class="w3-input w3-border w3-auto" style="width:400px" name="mdp" type="password"
+                           placeholder="Mot de passe">
+                </div>
+
+                <input class="w3-btn w3-green w3-margin" type="submit" value="Se connecter >">
+            </form>
+            <h2 class="w3-text-green">Inscription</h2>
+            <p> Vous n'avez pas encore de compte ? Veuillez vous inscrire <a href="{{ url_for('register') }}">ici</a>
+            </p>
+        </div>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'layouts/default2.html' %}
+
+{% block header %}
+   
+    <span class="w3-bar-item w3-right"><a onclick="document.getElementById('Connexion').style.display='block'"
+                class="w3-text-indigo" title="Se connecter">Sign in</a>
+                <div id='Connexion' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin w3-center">
+                            <span onclick="document.getElementById('Connexion').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <a href={{ url_for('login', type='local') }} class="w3-button w3-light-blue
+                                        w3-round-large w3-margin">Authentification </a>
+                            <a href={{ url_for('login', type='CAS') }} class="w3-button w3-blue
+                                        w3-round-large w3-margin">CAS Authentification CAS</a>
+                        </div>
+                    </div>
+                </div></span>
+    <span class="w3-bar-item w3-right"><a href={{ url_for('register') }} class="w3-text-indigo
+                ">Register</a></span>
+    {% endblock %}
+
+
+{% block menue %}
+    <a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Home </a>
+{% endblock %}
+
+
+{% block body %}
+
+    {% if err == 'true' %}
+        <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+            <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+            <h3> Error :</h3>
+            <p> {{ errlog}}</p>
+        </div>
+
+    {% endif %}
+
+    <div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding w3-center">
+        <h2 class="w3-text-green">Register</h2>
+        <form action="{{ url_for('rqstreg') }}" method="post">
+
+            <div class="w3-container w3-auto w3-margin">
+                <div class="w3-auto" style="width:50px"><i class="w3-xxlarge w3-text-green fa fa-user"></i></div>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="login" type="text"
+                       placeholder="login">
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <div class="w3-auto" style="width:50px"><i class="w3-xxlarge w3-text-green fa fa-envelope"></i></div>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="email" type="text"
+                       placeholder="Email">
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <i class="w3-xxlarge w3-text-green fa fa-lock" style="width:50px"></i>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="mdp1" type="password"
+                       placeholder="Password">
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <i class="w3-xxlarge w3-text-green fa fa-lock" style="width:50px"></i>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="mdp2" type="password"
+                       placeholder="Password">
+            </div>
+
+            <input class="w3-btn w3-green w3-margin" type="submit" value="Register >">
+        </form>
+        <h2 class="w3-text-green">Sign in</h2>
+        <p> If you have already an account, Please <a href="{{ url_for('login' , type='local') }}">Sign in</a>
+        </p>
+    </div>
+
+{% endblock %}

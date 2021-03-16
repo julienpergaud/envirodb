@@ -1,0 +1,71 @@
+{% extends 'layouts/default2.html' %}
+
+{% block user %}
+    <div class="w3-container w3-row">
+        <div class="w3-col s4">
+            <img src="{{url_for('static', filename='avatar2.png')}}" class="w3-circle w3-margin-right" style="width:46px">
+        </div>
+        <div class="w3-col s8 w3-bar">
+            <span>Welcome, <strong>{{user.name}}</strong></span><br>
+            <a href={{url_for('account')}} class="w3-bar-item w3-button w3-blue"><i class="fa fa-user"></i></a>
+            <a href={{url_for('logout')}} class="w3-bar-item w3-button"><i class="fa fa-user-times"></i></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menue %}
+      <a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Home</a>
+        <a href={{url_for('networks')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Network</a>
+        <a href={{url_for('measures')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Measures</a>
+        {% if admin == True %}
+        <a href={{url_for('admin')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-briefcase fa-fw"></i>
+            Administration </a>
+        {% endif %}
+{% endblock %}
+
+
+{% block body %}
+
+{% if err == 'true' %}
+        <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+            <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+            <h3> Error :</h3>
+            <p> {{ errlog}}</p>
+        </div>
+
+{% endif %}
+
+<div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding w3-center">
+    <h2 class="w3-text-green">Personal informations</h2>
+
+    <form action="{{ url_for('modaccount') }}" method="post">
+
+            <div class="w3-container w3-auto w3-margin">
+                <div class="w3-auto" style="width:50px"><i class="w3-xxlarge w3-text-green fa fa-user"></i></div>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="login" type="text"
+                       placeholder="Login" value={{user.name}}>
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <div class="w3-auto" style="width:50px"><i class="w3-xxlarge w3-text-green fa fa-envelope"></i></div>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="email" type="text"
+                       placeholder="Email" value={{user.email}}>
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <i class="w3-xxlarge w3-text-green fa fa-lock" style="width:50px"></i>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="mdp1" type="password"
+                       placeholder="Password">
+            </div>
+
+            <div class="w3-container w3-auto w3-margin">
+                <i class="w3-xxlarge w3-text-green fa fa-lock" style="width:50px"></i>
+                <input class="w3-input w3-border w3-auto" style="width:400px" name="mdp2" type="password"
+                       placeholder="Password">
+            </div>
+
+            <input class="w3-btn w3-green w3-margin" type="submit" value="Submit modification >">
+    </form>
+</div>
+
+{% endblock %}

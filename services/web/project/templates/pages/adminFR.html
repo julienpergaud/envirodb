@@ -1,0 +1,508 @@
+{% extends 'layouts/default2.html' %}
+
+{% block user %}
+<div class="w3-container w3-row">
+    <div class="w3-col s4">
+        <img src="{{url_for('static', filename='assets/avatar2.png')}}" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+        <span>Bienvenue, <strong>{{user}}</strong></span><br>
+        <a href={{url_for('account')}} class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+        <a href={{url_for('logout')}} class="w3-bar-item w3-button"><i class="fa fa-user-times"></i></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block menue %}
+<a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Accueil </a>
+ <a href={{url_for('networks')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Réseau</a>
+<a href={{url_for('measures')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Mesures</a>
+ <a href={{url_for('admin')}} class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-briefcase fa-fw"></i>
+    Administration </a>
+
+{% endblock %}
+
+
+{% block body %}
+
+    {% with messages =get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding w3-margin-top">
+                    <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+                    <h3> Erreur :</h3>
+                    <p> {{message}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<div class="w3-card-4 w3-border w3-light-grey w3-auto w3-padding">
+
+    <div class="w3-container">
+    <h2 class="w3-text-green w3-center"> Gestion des utilisateurs : </h2>
+    <h3 class=" w3-left"> Rechercher un utilisateur : </h3>
+    <form action="{{url_for('reqsearch')}}" method="post">
+        <div class="w3-row-padding w3-auto">
+            <div class="w3-third" style="width: 150px">
+                <select class="w3-select w3-border" name="option">
+                    <option value="name" selected="">Nom</option>
+                    <option value="mail">E-mail</option>
+                </select>
+
+            </div>
+            <div class="w3-third">
+                <input type="text" class="w3-input w3-border" placeholder="Recherche" name="value">
+            </div>
+
+            <div class="w3-third">
+                <input type="submit" class="w3-btn w3-green w3-round-large" value="Recherche">
+            </div>
+        </div>
+    </form>
+    </div>
+    {% for user in ressearch %}
+    {% if user.active == False %}
+    <div class="w3-bar w3-pale-red w3-margin-top">
+        <div class="w3-bar-item">{{user.id}}</div>
+        <div class="w3-bar-item">{{user.name}}</div>
+        <div class="w3-bar-item">{{user.email}}</div>
+        <div class="w3-bar-item w3-right" title="Supprimer l'utilisateur"><a href={{ url_for('deluser',
+            user_id=user.id)
+            }} class="w3-button w3-red
+            w3-round-large"><i class="fa fa-trash"></i></a></div>
+        <div class="w3-bar-item w3-right" title="Activer l'utilisateur"><a href={{ url_for('upuser',
+            user_id=user.id) }}
+            class="w3-button w3-green
+            w3-round-large"><i class="fa fa-check-circle"></i></a></div>
+    </div>
+    {% else %}
+    <div class="w3-bar w3-pale-green">
+        <div class="w3-bar-item">{{user.id}}</div>
+        <div class="w3-bar-item">{{user.name}}</div>
+        <div class="w3-bar-item">{{user.email}}</div>
+        <div class="w3-bar-item w3-right" title="Supprimer l'utilisateur"><a href={{ url_for('deluser',
+            user_id=user.id)
+            }} class="w3-button w3-red
+            w3-round-large"><i class="fa fa-trash"></i></a></div>
+        <div class="w3-bar-item w3-right" title="Désactiver l'utilisateur"><a href={{ url_for('downuser',
+            user_id=user.id) }} class="w3-button w3-orange
+            w3-round-large"><i class="fa fa-times-circle"></i></a></div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <h3 class="w3-left"> Liste des utilisateurs : </h3>
+    <div class="w3-bar">
+        <div class="w3-bar-item">ID</div>
+        <div class="w3-bar-item">Nom</div>
+        <div class="w3-bar-item">Email</div>
+    </div>
+
+    {% for user in users %}
+    {% if user.active == False %}
+    <div class="w3-bar w3-pale-red">
+        <div class="w3-bar-item">{{user.id}}</div>
+        <div class="w3-bar-item">{{user.name}}</div>
+        <div class="w3-bar-item">{{user.email}}</div>
+        <div class="w3-bar-item w3-right" title="Supprimer l'utilisateur"><a href={{ url_for('deluser',
+            user_id=user.id)
+            }} class="w3-button w3-red
+            w3-round-large"><i class="fa fa-trash"></i></a></div>
+        <div class="w3-bar-item w3-right" title="Activer l'utilisateur"><a href={{ url_for('upuser',
+            user_id=user.id) }}
+            class="w3-button w3-green
+            w3-round-large"><i class="fa fa-check-circle"></i></a></div>
+    </div>
+    {% else %}
+    <div class="w3-bar w3-pale-green">
+        <div class="w3-bar-item">{{user.id}}</div>
+        <div class="w3-bar-item">{{user.name}}</div>
+        <div class="w3-bar-item">{{user.email}}</div>
+        <div class="w3-bar-item w3-right" title="Supprimer l'utilisateur"><a href={{ url_for('deluser',
+            user_id=user.id)
+            }} class="w3-button w3-red
+            w3-round-large"><i class="fa fa-trash"></i></a></div>
+        <div class="w3-bar-item w3-right" title="Désactiver l'utilisateur"><a href={{ url_for('downuser',
+            user_id=user.id) }} class="w3-button w3-orange
+            w3-round-large"><i class="fa fa-times-circle"></i></a></div>
+         <div class="w3-bar-item w3-right" title="Générer une clée api"><a href={{ url_for('resetkey',
+            user_id=user.id) }} class="w3-button w3-green
+            w3-round-large"><i class="fa fa-key"></i></a></div>
+        <div class="w3-bar-item w3-right"><button onclick="document.getElementById('{{user.id}}net').style.display='block'"
+                class=" w3-button w3-light-blue w3-round-large" title="Gérer les droits d'accès aux réseaux"><i class="fa fa-location-arrow"></i></button></div>
+                <div id='{{user.id}}net' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin">
+                            <span onclick="document.getElementById('{{user.id}}net').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <h2 class="w3-text-green w3-center"> Gestion des réseaux accessible par l'utilisateur : </h2>
+                            {% if user.networklist is not none %}
+                                <h3 class="w3-text-green">Réseaux accessible par l'utilisateur :</h3>
+                                <form method="post" action={{url_for('reqdelNet')}}>
+                                    {% for net in reseaux %}
+                                        {%if net.id_network is in user.networklist %}
+                                          <p>
+                                          <input class="w3-check" type="checkbox" id={{net.id_network}} name="checkboxDel{{user.id}}" value={{net.id_network}}>
+                                          <label> {{net.name}}</label>
+                                          </p>
+                                        {%endif%}
+                                    {% endfor %}
+                                    <input type="hidden" name="user" value={{user.id}}>
+                                    <input class="w3-btn w3-red w3-margin" type="submit" value="Supprimer l'accès aux réseaux >">
+                                </form>
+                            {% else %}
+                                <h3 class="w3-text-green">Réseaux non accessible par l'utilisateur :</h3>
+                                <form action={{url_for('reqaddNet')}} method="post">
+                                    {% for net2 in reseaux %}
+                                    {% if net2 is not in user.networklist %}
+                                        <p>
+                                        <input class="w3-check" type="checkbox" id={{net2.id_network}} name="checkboxAdd{{user.id}}" value={{net2.id_network}}>
+                                        <label> {{net2.name}}</label>
+                                        </p>
+                                    {% endif %}
+                                    <input type="hidden" name="user" value={{user.id}}>
+                                    <input class="w3-btn w3-green w3-margin" type="submit" value="Autoriser l'accès aux réseaux >">
+                                {% endfor %}
+                            </form>
+                            {% endif %}
+                            {% if user.networklist is none %}
+                                <h3 class="w3-text-green">Réseaux non accessible par l'utilisateur :</h3>
+                                <form action={{url_for('reqaddNet')}} method="post">
+                                {% for net3 in reseaux %}
+                                    <p>
+                                    <input class="w3-check" type="checkbox" id={{net3.id_network}} name="checkboxAdd{{user.id}}" value={{net3.id_network}}>
+                                    <label> {{net3.name}}</label>
+                                    </p>
+                                {% endfor %}
+                                    <input type="hidden" name="user" value={{user.id}}>
+                                <input class="w3-btn w3-green w3-margin" type="submit" value="Autoriser l'accès aux réseaux >">
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <hr>
+
+        <h2 class="w3-text-green w3-center"> Gestion des reseaux : </h2>
+        <h3 class="w3-left"> Liste des reseaux : </h3>
+        <div class="w3-bar w3-padding">
+                <div class="w3-bar-item">ID</div>
+                <div class="w3-bar-item">Nom</div>
+                <div class="w3-bar-item">Date création</div>
+                <div class="w3-bar-item">Date éxpiration</div>
+                <div class="w3-bar-item">Déscription</div>
+                 <button onclick="document.getElementById('addNetworkPopup').style.display='block'"
+                class=" w3-button w3-green w3-round-large w3-bar-item w3-right" title="Ajouter un réseau">Ajouter un réseau</button>
+                <div id='addNetworkPopup' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin">
+                          <span onclick="document.getElementById('addNetworkPopup').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                          <h2 class="w3-text-green w3-center"> Création Réseau </h2>
+                          <p> Vous allez créer un réseau, veuillez d'abord entré les information suivantes :</p>
+                          <form id="creaRes" method="post" action="{{ url_for('reqaddRes') }}">
+                                <label for="name" style="display: block;">Nom du reseau : </label>
+                                <input type="text" name="name" id="name" value="">
+                                <hr>
+                                <label for="descCourt" style="display: block;">Description courte du reseau : </label>
+                                <input type="text" style="width:100%;" name="descCourt" id="descCourt" value="">
+                                <hr>
+                                <label for="descLong" style="display: block;">Description longue du reseau : </label>
+                                <textarea id="descLong" form="creaRes" name="descLong" rows="5" cols="115" style="width:100%;"></textarea>
+                                <hr>
+                                <label for="dateFin" style="display: block;">Date de fin du reseau : </label>
+                                <input type="date" name="dateFin" id="dateFin" value="">
+                                <hr>
+                                <div class="w3-center w3-margin"><input class="w3-btn w3-green w3-center" type="submit" value="Valider >"></div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+        </div>
+        {% for database in reseaux %}
+            <div class="w3-bar w3-padding w3-white">
+                <div class="w3-bar-item">{{database.id_network}}</div>
+                <div class="w3-bar-item">{{database.name}}</div>
+                {% if database.dateDebut is not none %}
+                <div class="w3-bar-item">{{database.dateDebut.strftime('%d/%m/%Y')}}</div>
+                {% endif %}
+
+                {% if database.dateFin is not none %}
+                <div class="w3-bar-item">{{database.dateFin.strftime('%d/%m/%Y')}}</div>
+                {% endif %}
+                <div class="w3-bar-item">{{database.descCourt}}</div>
+                <button onclick="document.getElementById('{{database.id_network}}del').style.display='block'"
+                class=" w3-bar-item w3-right w3-button w3-red w3-round-large w3-margin-left" title="Supprimer le reseau"><i class="fa fa-trash"></i></button>
+                <div id='{{database.id_network}}del' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin w3-center">
+                            
+                            <span onclick="document.getElementById('{{database.id_network}}del').style.display='none'"
+                              class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                              <h2 class="w3-text-green w3-center"> Reseaux : {{database.id_network}} </h2>
+                              <p> Etes vous sur de vouloir supprimer le réseau séléctionné ?</p>
+                              <p> Cela entrainera la suppression des capteurs appartenant au réseau et leurs mesures </p>
+                              <hr>
+                            <span onclick="document.getElementById('{{database.id_network}}del').style.display='none'"
+                              class="w3-button w3-round-large w3-red w3-margin">Non</span>
+                              <a href="{{url_for('reqsuppr', id_reseau=database.id_network)}}" class="w3-button w3-round-large w3-green w3-margin">Oui</a> 
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="reseau" onclick="document.getElementById('{{database.id_network}}mod').style.display='block'"
+                class=" w3-bar-item w3-right w3-button w3-orange w3-round-large w3-margin-left" title="Modifier le reseau"><i class="fa fa-edit"></i></button>
+                <div id='{{database.id_network}}mod' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin">
+                          <span onclick="document.getElementById('{{database.id_network}}mod').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                          <form id="{{database.id_network}}" method="post" action="{{ url_for('reqmod') }}">
+                              <h2 class="w3-text-green w3-center"> Reseaux : {{database.id_network}} </h2>
+                                <input name="id_network" type="hidden" value="{{database.id_network}}">
+                                <label for="name" style="display: block;">Nom du reseau : </label>
+                                <input type="text" name="name" id="name" value="{{database.name}}">
+                                <hr>
+                                <label for="descCourt" style="display: block;">Description courte du reseau : </label>
+                                <input type="text" style="width:100%;" name="descCourt" id="descCourt" value="{{database.descCourt}}">
+                                <hr>
+                                <label for="descLong" style="display: block;">Description longue du reseau : </label>
+                                <textarea id="descLong" form="{{database.id_network}}" name="descLong" rows="5" cols="115" style="width:100%;">{{database.descLong}}</textarea>
+                                <hr>
+                                <label for="dateDebut" style="display: block;">Date de création du reseau : </label>
+                                {% if database.dateDebut is not none %}
+                                    <input type="date" name="dateDebut" id="dateDebut" value="{{database.dateDebut.strftime('%Y/%m/%d')}}">
+                                {% else %}
+                                    <input type="date" name="dateDebut" id="dateDebut" value="">
+                                {% endif %}
+                                <hr>
+                                <label for="dateFin" style="display: block;">Date de fin du reseau : </label>
+                                {% if database.dateFin is not none %}
+                                    <input type="date" name="dateFin" id="dateFin" value="{{database.dateFin.strftime('%Y/%m/%d')}}">
+                                {% else %}
+                                    <input type="date" name="dateFin" id="dateFin" value="">
+                                {% endif %}
+                                <hr>
+                                <div class="w3-center w3-margin"><input class="w3-btn w3-green w3-center w3-round-large" type="submit" value="Valider les modifications"></div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+
+            <button  onclick="document.getElementById('{{database.id_network}}capt').style.display='block'"
+                class=" w3-bar-item w3-margin-left w3-right w3-button w3-light-blue w3-round-large" title="Gérer le réseau de capteurs"><i class="fa fa-location-arrow"></i></button>
+                <div id='{{database.id_network}}capt' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin">
+                            <span onclick="document.getElementById('{{database.id_network}}capt').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <h2 class="w3-text-green w3-center"> Gestion des capteurs : </h2>
+                            <h3 class="w3-left"> Liste des capteurs : </h3>
+                            <div class="w3-bar w3-padding">
+                                <div class="w3-bar-item">ID</div>
+                                <div class="w3-bar-item">Nom</div>
+                                <div class="w3-bar-item">Latitude</div>
+                                <div class="w3-bar-item">Longitude</div>
+                            </div>
+                                {% for capt in capteurs %}
+                                    {% if capt.id_network == database.id_network %}
+                                    <div class="w3-bar w3-padding w3-light-grey">
+                                        <div class="w3-bar-item">{{capt.id_sensor}}</div>
+                                        <div class="w3-bar-item">{{capt.name}}</div>
+                                        <div class="w3-bar-item">{{capt.latitude}}</div>
+                                        <div class="w3-bar-item">{{capt.longitude}}</div>
+                                        <a href="{{url_for('reqdelStation', id_sensor=capt.id_sensor)}}" class="w3-button w3-red w3-right w3-round-large w3-margin-left" title="Supprimer le capteur"><i class="fa fa-trash"></i></a>
+                                        <button id="capteur" onclick="document.getElementById('{{capt.id_sensor}}mods').style.display='block'"
+                                            class=" w3-bar-item w3-right w3-button w3-orange w3-round-large w3-margin-left" title="Modifier le capteur"><i class="fa fa-edit"></i></button>
+                                        <div id="{{capt.id_sensor}}mods" class="w3-bar w3-white" style="display: none">
+                                            <form method="post" action="{{url_for('reqmodStation')}}">
+                                                 <div class="w3-bar-item"><input type="text" name="name" id="name" value="{{capt.name}}"></div>
+                                                 <div class="w3-bar-item"><input type="text" name="latitude" id="latitude" value="{{capt.latitude}}"></div>
+                                                 <div class="w3-bar-item"><input type="text" name="longitude" id="longitude" value="{{capt.longitude}}"></div>
+                                                 <div class="w3-bar-item"><input type="hidden" name="id_sensor" id="id_sensor" value="{{capt.id_sensor}}"></div>
+                                                <div class="w3-bar-item w3-right"><input class="w3-button w3-green w3-center w3-round-large" type="submit" value="Modifier >"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %} 
+                            <hr>
+                            <h3 class="w3-left"> Ajouter un capteur : </h3>
+                            <div class="w3-bar">
+                            <form method="post" action="{{ url_for('reqaddStation') }}">
+                                <label for="name" style="display: inline;">Nom du capteur : </label>
+                                <input type="text" name="name" id="name" value="">
+                                <label for="latitude" style="display: inline;">Latitude : </label>
+                                <input type="text" name="latitude" id="latitude" value="">
+                                <label for="longitude" style="display: inline;">Longitude : </label>
+                                <input type="text" name="longitude" id="longitude" value="">
+                                <input type="hidden" name="id_network" id="id_network" value="{{database.id_network}}">
+                                <div class="w3-center w3-margin"><input class="w3-button w3-green w3-center w3-round-large" type="submit" value="Ajouter capteur >"></div>
+                            </form>
+                            </div>
+                            <!--
+                            <hr>
+                            <h3 class="w3-left"> Ajouter une liste de capteurs : </h3>
+                            <p class="w3-left"> Veuillez joindre le fichier csv contenant la liste de capteurs et indiquez le séparateur de ce fichier. <span class="w3-left w3-text-orange"> Attention cela supprimera les capteurs présents sur le réseau </span></p>
+                            
+                            <div class="w3-bar">
+                            <form method="post" enctype="multipart/form-data" action="{{ url_for('reqaddStationCSV')}}">
+                                <label for="separator" style="display: inline;">Séparateur du fichier : </label>
+                                <input class="w3-margin-right" type="text" name="separator" id="separator" value="">
+                                <label for="file" style="display: inline;">Fichier csv : </label>
+                                <input type="file" name="file" id="file">
+                                <input type="hidden" name="id_network" id="id_network" value="{{database.id_network}}">
+                                <div class="w3-center w3-margin"><input class="w3-button w3-green w3-center w3-round-large" type="submit" value="Ajouter liste de capteurs >"></div>
+                            </form>
+                            </div>
+                            -->
+                      </div>
+                  </div>
+              </div>
+
+        <button onclick="document.getElementById('{{database.id_network}}mesures').style.display='block'"
+                class=" w3-bar-item w3-right w3-button w3-light-green w3-round-large" title="Gérer les mesures du réseau"><i class="fa fa-database"></i></button>
+                <div id='{{database.id_network}}mesures' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin">
+                            <span onclick="document.getElementById('{{database.id_network}}mesures').style.display='none'"
+                          class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                            <h2 class="w3-text-green w3-center"> Gestion des mesures du réseau {{database.id_network}} : </h2>
+                            <h3 class="w3-left"> Liste des variables : </h3>
+
+                            <div class="w3-bar w3-padding">
+                                <div class="w3-bar-item">ID</div>
+                                <div class="w3-bar-item">Nom</div>
+                                <div class="w3-bar-item">Unitée</div>
+                            </div>
+                            {% for var in mesures_var %}
+                                    {% if var.id_network == database.id_network %}
+                                    <div class="w3-bar w3-padding w3-light-grey">
+                                        <div class="w3-bar-item">{{var.id_type}}</div>
+                                        <div class="w3-bar-item">{{var.name}}</div>
+                                        <div class="w3-bar-item">{{var.unite}}</div>
+                                        <a href="{{url_for('reqdelMesure', id_type=var.id_type)}}" class="w3-button w3-red w3-right w3-round-large" title="Supprimer la variable"><i class="fa fa-trash"></i></a>
+                                    </div>
+                                    {% endif %}
+                            {% endfor %}
+                            <hr>
+                            <h3 class="w3-left"> Ajouter une variable : </h3>
+                            <div class="w3-bar">
+                            <form method="post" action="{{ url_for('reqaddVar') }}">
+                                <label for="name" style="display: inline;">Nom de la variable : </label>
+                                <input type="text" name="name" id="name" value="">
+                                <label for="unite" style="display: inline;">Unité : </label>
+                                <input type="text" name="unite" id="unite" value="">
+                                <input type="hidden" name="id_network" id="id_network" value="{{database.id_network}}">
+                                <input class="w3-button w3-green w3-center w3-round-large w3-margin-left" type="submit" value="Ajouter une variable >">
+                            </form>
+                            </div>
+                            <!--
+                            <hr>
+                            <h3 class="w3-left"> Ajouter des mesures : </h3>
+                            <p class="w3-left"> Veuillez joindre le fichier csv contenant la liste des différentes mesures et indiquez le séparateur de ce fichier. <span class="w3-left w3-text-orange"> Attention cela supprimera les mesures présentes sur le capteurs </span></p>
+                            
+                            <div class="w3-bar">
+                            <form method="post" enctype="multipart/form-data" action="{{ url_for('reqaddMesures')}}">
+                                <label for="separator" style="display: inline;">Séparateur du fichier : </label>
+                                <input class="w3-margin-right" type="text" name="separator" id="separator" value="">
+                                <label for="file" style="display: inline;">Fichier csv : </label>
+                                <input type="file" name="file" id="file">
+                                <label for="station" style="display: inline;">Capteur : </label>
+                                <select class="w3-select w3-border w3-margin-top" name="station" id="station">
+                                    <option value="" selected disabled>Nom</option>
+                                    {% for capt in capteurs %}
+                                        {% if capt.id_network == database.id_network %}
+                                            <option value="{{capt.id_sensor}}">{{capt.name}}</option>
+                                        {% endif %}
+                                    {% endfor %} 
+                                </select>
+
+                                <label for="variable" style="display: inline;">Variable : </label>
+                                <select class="w3-select w3-border w3-margin-top" name="variable" id="variable">
+                                {% for var in mesures_var %}
+                                    {% if var.id_network == database.id_network %}
+                                        <option value="{{var.id_type}}">{{var.name}} : {{var.unite}} </option>
+                                    {% endif %}
+                                {% endfor %}
+                                <input type="hidden" name="id_network" id="id_network" value="{{database.id_network}}">
+                                <div class="w3-center w3-margin"><input class="w3-button w3-green w3-center w3-round-large" type="submit" value="Ajouter liste de mesures >"></div>
+                            </form>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+
+
+        </div>
+
+        {% endfor %}
+<!--
+    <h2 class="w3-text-green w3-center"> Gestion des capteurs : </h2>
+    <h3 class=" w3-left"> Rechercher un capteur : </h3>
+    <form action="" method="post">
+        <div class="w3-row-padding w3-auto">
+            <div class="w3-third" style="width: 150px">
+                <select class="w3-select w3-border" name="option">
+                    <option value="name" selected="">Nom</option>
+                    <option value="latitude">Latitude</option>
+                    <option value="longitude">Longitude</option>
+                    <option value="id_network">ID Réseau</option>
+                </select>
+            </div>
+
+            <div class="w3-third">
+                <input type="text" class="w3-input w3-border" placeholder="Recherche" name="value">
+            </div>
+
+            <div class="w3-third">
+                <input type="submit" class="w3-btn w3-green w3-round-large" value="Recherche">
+            </div>
+        </div>
+    </form>
+
+       <div class="w3-bar w3-padding">
+            <div class="w3-bar-item">ID</div>
+            <div class="w3-bar-item">Nom</div>
+            <div class="w3-bar-item">Latitude</div>
+            <div class="w3-bar-item">Longitude</div>
+            <div class="w3-bar-item">ID Réseau</div>
+        </div>
+    {% for station in ressearchStation %}
+        <div class="w3-bar w3-white w3-padding">
+            <div class="w3-bar-item">{{station.id_sensor}}</div>
+            <div class="w3-bar-item">{{station.name}}</div>
+            <div class="w3-bar-item">{{station.latitude}}</div>
+            <div class="w3-bar-item">{{station.longitude}}</div>
+            <div class="w3-bar-item">{{station.id_network}}</div>
+            <button onclick="document.getElementById('{{station.id_sensor}}delStation').style.display='block'"
+                class=" w3-bar-item w3-right w3-button w3-red w3-round-large w3-margin-left" title="Supprimer le capteur"><i class="fa fa-trash"></i></button>
+                <div id='{{station.id_sensor}}delStation' class="w3-modal">
+                    <div class="w3-modal-content">
+                        <div class="w3-container w3-margin w3-center">
+                            <span onclick="document.getElementById('{{station.id_sensor}}delStation').style.display='none'"
+                              class="w3-button w3-display-topright w3-pale-red">&times;</span>
+                              <h2 class="w3-text-green w3-center"> Capteur : {{station.id_network}} </h2>
+                              <p> Etes vous sur de vouloir supprimer le capteur séléctionné ?</p>
+                              <p> Cela entrainera la suppression des données appartenant au capteur. </p>
+                              <hr>
+                            <span onclick="document.getElementById('{{station.id_sensor}}delStation').style.display='none'"
+                              class="w3-button w3-round-large w3-red w3-margin">Non</span>
+                              <a href="{{url_for('reqdelStation', id_sensor=station.id_sensor)}}" class="w3-button w3-round-large w3-green w3-margin">Oui</a> 
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    {% endfor %}
+
+    </div>
+    -->
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+nom,LOCALISATION,Adresse,long,lat,ALTITUDE,INSTAL,Support,Communication,LCZ_100 m,LCZ_300 m,SVF_3m
+S01,Liberation,Dijon / Centre-Ville: Place de la liberation - Grilles de l'Hotel de Ville,5.041254685,47.32152646,263.419,06/06/2014,Grille,,2,2,0.495573549952958
+S02,Sainte-Anne,Dijon / Centre-Ville: Parking St Anne,5.03869264,47.31824795,249.818,06/06/2014,Candélabre,,3,2,0.738198123419073
+S03,Republique,Dijon / Place de la Republique,5.044427261,47.32705576,263.716,06/06/2014,Candélabre,,4,3,0.684439185180383
+S04,Fort d'Hauteville,Hauteville-les-Dijon / d107 Fort de Hauteville-Les-dijon,4.97943466,47.36540438,436.164,06/06/2014,Candélabre,,103,103,0.767944967042676
+S05,Barabant,Dijon / 30 rue du Transvaal,5.039005715,47.31540771,239.781,06/06/2014,Candélabre,,2,2,0.402030470400966
+S06,Chancelier de l'Hospital,Dijon / croisement rue du Chancelier et rue de Berlier,5.046948783,47.31923786,246.449,06/06/2014,Poteau électrique,,2,2,0.592570937024452
+S07,Barbe,Dijon / place Barbe / rue d'Ahuy,5.038402665,47.32873143,284.832,06/06/2014,Candélabre,,2,3,0.463423196441886
+S08,Thurot,Dijon / Place au croisement de rue de Thurot et Victor Hugo,5.029486102,47.32635146,298.676,06/06/2014,Candélabre,,2,3,0.600803679516904
+S09,'Auxonne,Dijon / Croisement rue d'Auxonne (nø56) et rue Alfred de Musset,5.048545153,47.31420539,240.265,06/06/2014,Candélabre,,3,3,0.526126891309775
+S10,Jouvence,Dijon / Croisement rue de Jouvence et rue de la Houblonniere,5.039235204,47.33346631,241.226,06/06/2014,Poteau électrique,,3,3,0.658662511951429
+S11,Monchapet,Dijon / 14-15 rue Charles Suisse (Quartier Montchapet),5.02480281,47.33400581,267.631,06/06/2014,Candélabre béton électrique,,4,4,0.52032780640538
+S12,Bourroches,Dijon / 36 rue Pierre Joseph Antoine (Quartier Bourroches),5.019971345,47.31206315,231.982,06/06/2014,Poteau électrique,,3,3,0.573333480373398
+S13,ZA Chenove,Chenove / 8 rue Jacques Daguerre (ZA),5.01742076,47.28996479,254.873,06/06/2014,Candélabre,,8,8,0.760724235486667
+S14,ZA Marsannay-la-Cote,Marsannay-La-Cote / rue Gustave Eiffel (ZA),5.011467472,47.2802775,266.542,06/06/2014,Candélabre,,8,8,0.833536989126568
+S15,ZA Quetigny,Quetigny / 13-15 rue des Chalands (ZA),5.096754865,47.31065151,240.178,06/06/2014,Candélabre,,8,8,0.830012340011888
+S16,ZA Cap Nord,Dijon / rue Ernest Chaput. vers l'arret de bus Chaput 2 (ZA Cap Nord),5.065587384,47.34446203,253.078,06/06/2014,Candélabre,,8,8,0.794203629364158
+S17,ZA Longvic,Longvic / 5-7 rue de la Renouille (ZA Longvic),5.036439717,47.28880224,226.735,06/06/2014,Candélabre,,8,8,0.857159011913245
+S18,Zenith,Dijon / Parking relai zenith,5.057021193,47.35736496,264.497,06/06/2014,Candélabre,,8,8,0.889634168690247
+S19,Saint-Apollinaire,St Apollinaire / 5 rue de Bourgogne. croisement Impasse de la Tille,5.085460018,47.33285524,200.814,06/06/2014,Candélabre,,4,4,0.62680764596422
+S20,Quetigny,Quetigny / 4 rue Henry Dunant,5.119674858,47.31306536,239.076,06/06/2014,Candélabre,,6,6,0.665276170270369
+S21,Neuilly-les-Dijon,Neuilly-les-Dijon / 18 rue de l'Eglise,5.11101113,47.27793824,230.907,06/06/2014,Candélabre,,6,6,0.743326607653545
+S22,Longvic,Longvic / 7-9 rue Georges Duhamel,5.056703537,47.28517358,229.257,06/06/2014,Candélabre,,3,6,0.674860015798778
+S23,Talant,Talant / 29 rue de Montoillots,5.007942319,47.34246169,293.961,06/06/2014,Candélabre,,4,6,0.68192640267873
+S24,Pompon,Dijon / Croisement Boulevard Pompom et rue Marguerite de Flandres,5.019443052,47.33412782,256.566,06/06/2014,Candélabre,,3,3,0.601816513328293
+S25,Eiffel,Dijon / Croisement 14-16 rue du Pere Charles de Foucauld,5.004610698,47.31166333,269.499,06/06/2014,Candélabre,,3,3,0.647889385836926
+S26,Marsannay-la-Côte,Marsannay-la-Cote / 18 rue Jean Baptiste Greuze,4.999183598,47.27970292,273.854,06/06/2014,Candélabre,,6,6,0.697950804024832
+S27,Larrey,Dijon / 30 rue de Larrey (Quartier du Canal),5.017857791,47.31546661,240.92,06/06/2014,Poteau électrique,,3,3,0.696014187418323
+S28,Marc d'Or,Dijon / 1 Allee Louis Pergaud (Marc d'Or),4.993447375,47.31672496,350.032,06/06/2014,Poteau électrique en béton + Candélabre,,4,4,0.67837050161567
+S29,Campus,Dijon / 9 rue Edgard Faure (Campus),5.071035864,47.31042856,272.451,06/06/2014,Candélabre IUT 27,,5,5,0.669255296764899
+S30,Fontaine d'Ouche,Dijon / Fontaine d'Ouche / 16 Bd Gaston Bachelard,5.00140075,47.31874067,273.629,06/06/2014,Candélabre,,4,4,0.684386952665638
+S31,Gresilles,Dijon / Croisement rue Castelnau et rue Joseph Kessel (Gresilles),5.070123478,47.33429924,267.381,06/06/2014,Candélabre,,9,4,0.716779959031795
+S32,Parc des Sports,Dijon / Boulevard Trimolet (Parc des sport. le long du tram),5.065194764,47.32399943,281.815,06/06/2014,Candélabre Divia,,3,4,0.787872028711464
+S33,Entre Saint-Apollinaire et Ruffey,Saint-Apollinaire / Chemin de Saint-Apollinaire a Ruffey : Champlevé,5.097910335,47.35001042,226.733,06/06/2014,Poteau téléphonique,,104,104,0.890499883291628
+S34,Magny-sur-Tille,Magny-Sur-Tille / 5-7 rue Neuve,5.172510683,47.27844659,218.388,06/06/2014,Candélabre,,101,9,0.713216190697977
+S35,Ouges,Ouges / rue de l'Abbaye  croisement avenue de la gare,5.075019462,47.26061644,234.291,06/06/2014,Poteau électrique,,9,9,0.647471557074014
+S36,Fenay,Fenay / 6 chemin de la Croix Etienne,5.062105874,47.23477929,240.261,06/06/2014,Candélabre,,9999,9,0.744546957215911
+S37,Daix,Daix / 19-21 rue des Champs Moreaux,5.004533436,47.3526204,338.875,06/06/2014,Candélabre,,9,9,0.731750096344017
+S38,Perrigny-les-Dijon,Perrigny-les-Dijon / 8 rue de la Fontaine,5.005948723,47.26066151,253.498,06/06/2014,Poteau électrique,,104,104,0.790687883010561
+S39,Flavignerot,Flavignerot / 8 rue de la Ferme,4.915430697,47.2781863,517.216,06/06/2014,Poteau téléphonique,,104,104,0.667652470385292
+S40,Ahuy,Ahuy / 15-17 rue des Grands Clos,5.02103938,47.36746295,277.835,06/06/2014,Candélabre,,9,9,0.665731892264144
+S41,Lac Kir,Dijon / Lac kir (plage),5.007082685,47.32543436,253.718,06/06/2014,Candélabre (éclairage plage),,2,107,0.577973714038872
+S42,Port du Canal,Dijon / Quai Gauthey pres de la peniche Cancale (Port du canal),5.027631536,47.31496173,234.84,06/06/2014,Candélabre,,107,107,0.743698246871771
+S43,Colombiere,Dijon / Parc de la Colombiere,5.042423034,47.29827588,243.382,06/06/2014,Poteau parc animaux,,101,101,0.597092845788769
+S44,Domaine Cras,Dijon / Domaine de la Cras. entre Plombiere-les-Dijon et Corcelles-les-Monts ,4.954872494,47.3276953,407.685,06/06/2014,Poteau électrique en béton,,104,104,0.87974713263662
+S45,Chenove vignes,Chenove / Clos du Chapitre,5.000298633,47.29619091,281.225,06/06/2014,Poteau téléphonique,,7,102,0.82053031583664
+S46,SNCF albedo fonce,Dijon Gare SNCF Foncé,5.028617713,47.3238976,253.01,06/06/2014,Candélabre,,8,2,0.550304467923308
+S47,SNCF albedo clair,Dijon Gare SNCF Clair,5.028738587,47.3232975,255.424,06/06/2014,Candélabre,,8,2,0.677616636431486
+S48,Chenove Grand Ensembles,Chenove / Place du 19 mars 1962,5.006511636,47.2976774,274.001,06/06/2014,Candélabre,,4,4,0.651864571505083
+S49,Valmy,Dijon / Parc d'activites Valmy,5.049991818,47.36610337,304.329,06/06/2014,Candélabre,,5,5,0.771775885366135
+S50,Plombieres-les-Dijon,Plombieres-les-Dijon / rue de Velars. D10. parking a la sortie de Plombiere,4.954934494,47.34133127,234.097,06/06/2014,Candélabre,,101,101,0.579280854801603
+S51,Longvic MF,Longvic / Aeroport,5.088329,47.266656,219,06/06/2014,Station MF,,104,104,0.916190929848941
+S52,Goujon,Dijon / 42 rue du Gougeon,5.03349,47.30591,233,01/09/2016,Poteau électrique,,2,3,0.537524448916077
+S53,Cromois,Quetigny / piscine olympique. chemin de Cromois,5.083,47.32042,240,02/09/2016,Candélabre,,104,104,0.712269221269121
+S54,Quetigny Route de Couternon,Quetigny / La barre du bois. point cote 218m. route de Couternon,5.12831,47.32577,214,03/09/2016,Poteau téléphonique,,104,104,0.767300079395312
+S55,Fontaine-les-Dijon,Fontaine-les-Dijon / Rue des grandes Varennes,5.03598,47.35587,260,04/09/2016,Candélabre,,8,8,0.613455600462522
+S56,Hauteville-les-Dijon,Hauteville-les-Dijon / 21.Rue d'Ahuy,5.00132,47.36722,363,05/09/2016,Candélabre,,103,9,0.578912283348195
+S57,Plombieres-les-Dijon1,Plombieres-les-Dijon / Chemin de la Perouse,4.95935,47.34851,370,06/09/2016,Poteau téléphonique,,103,103,0.420309509974762
+S58,Plombieres-les-Dijon2,Plombieres-les-Dijon / Route des jardin,4.97607,47.3364,246,07/09/2016,Candélabre,,7,102,0.784608802536248
+S59,Rente de la cras,Dijon / Chemin de la rente de la Cras. Fontaine dOuche,4.99332,47.32454,286,08/09/2016,Candélabre poteau bois,,104,103,0.824318400079733
+S60,Corcelles-les-Monts,Corcelles-les-Monts / Chemin de Gouville,4.96009,47.30027,424,09/09/2016,Candélabre,,104,104,0.934144633166133

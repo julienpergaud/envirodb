@@ -1,0 +1,101 @@
+{% extends 'layouts/default2.html' %}
+
+{% block user %}
+<div class="w3-container w3-row">
+    <div class="w3-col s4">
+        <img src="{{url_for('static', filename='assets/avatar2.png')}}" class="w3-circle w3-margin-right" style="width:46px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+        <span>Bienvenue, <strong>{{user.name}}</strong></span><br>
+        <a href={{url_for('account')}} class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+        <a href={{url_for('logout')}} class="w3-bar-item w3-button"><i class="fa fa-user-times"></i></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block menue %}
+        <a href={{url_for('home')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i> Accueil</a>
+        <a href={{url_for('networks')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-location-arrow"></i> Réseau</a>
+        <a href={{url_for('measures')}} class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-location-arrow"></i> Mesures</a>
+{% if user.admin == True %}
+<a href={{url_for('admin')}} class="w3-bar-item w3-button w3-padding"><i class="fa fa-briefcase fa-fw"></i>
+            Administration </a>
+        {% endif %}
+{% endblock %}
+
+
+{% block body %}
+<h1 class="w3-text-green w3-center"> Consultation des mesures</h1>
+<!-- <button id="cloneDiv">Ajouter un graphique</button> -->
+ {% if err == 'true' %}
+        <div class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-round w3-auto w3-padding">
+            <i class="w3-xxxlarge w3-text-red fa fa-times-circle w3-right"></i>
+            <h3> Error :</h3>
+            <p> {{ errlog}}</p>
+        </div>
+
+    {% endif %}
+{% for i in range(nbgraph) %}
+<div class="w3-container w3-margin w3-border w3-round-large w3-padding panel" id="panel{{i}}">
+
+    <h2 class="w3-text-green w3-center">Graphique {{i+1}}</h2>
+
+    <div class="w3-container w3-center w3-padding">
+                 <button onclick="document.getElementById('addMeasure{{i}}').style.display='block'"
+                 class=" w3-button w3-green w3-round-large w3-center" title="Ajouter une mesure">Ajouter les données</button>
+
+        <div class="graph w3-margin w3-padding" id="graph{{i}}">
+
+        </div>
+
+        {% if graph and graph[i] != 'vide'  %}
+        <form method="post" action="{{url_for('reqexport')}}">
+            <input type="hidden" name="data" value="{{graph[i]}}">
+            <input type="hidden" name="id" value="{{i}}">
+            <button class="w3-button w3-light-blue w3-round-large w3-center" style="position: inherit" title="Exporter mesures" type="submit">Exporter mesures</button>
+            <a class="w3-button w3-red w3-round-large w3-center" title="Supprimer graph" id="delButton{{i}}" onclick=delGraph({{i}})>Supprimer graphique</a>
+        </form>
+
+
+            <script>
+                _graph = {{graph[i] | safe}}
+                createGraph(_graph,{{i}})
+            </script>
+        {% endif %}
+
+    </div>
+
+
+<div id='addMeasure{{i}}' class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container w3-margin" style="margin-bottom: 35% !important;">
+                          <span onclick="document.getElementById('addMeasure{{i}}').style.display='none'"
+                                class="w3-button w3-display-topright w3-pale-red">&times;</span>
+            <h2 class="w3-text-green w3-center" > Selecteur de données</h2>
+            <hr>
+            <div class="w3-container">
+                <label class="w3-padding">Date de début :</label>
+                <input class="w3-padding" type="date" name="dateDebut1" id="dateDebut{{i}}" value="">
+            <label class="w3-center w3-padding">Date de fin :</label>
+            <input class=" w3-center w3-padding" type="date" name="dateFin1" id="dateFin{{i}}" value="">
+            <button class="w3-btn w3-green w3-round-large w3-right w3-" title="Valider la séléction" id="bouton{{i}}"
+                    onclick=getinfo({{i}})>Valider la séléction
+            </button>
+            </div>
+            <hr>
+            <div class="w3-container w3-margin" id="arbre{{i}}"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    _data = {{data | safe}}
+    createTree(_data, {{i}})
+</script>
+
+
+</div>
+{% endfor %}
+
+{% endblock %}
